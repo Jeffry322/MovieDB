@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities.WatchlistAggregate;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Config
 {
-    internal class WatchlistMovieConfig
+    public class WatchlistMovieConfig : IEntityTypeConfiguration<WatchlistMovie>
     {
+        public void Configure(EntityTypeBuilder<WatchlistMovie> builder)
+        {
+            builder.Property(wm => wm.IsWatched)
+                .IsRequired()
+                .HasDefaultValue(false);
+        }
     }
 }
