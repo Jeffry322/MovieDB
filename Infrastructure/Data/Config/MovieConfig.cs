@@ -25,17 +25,12 @@ namespace Infrastructure.Data.Config
                 .HasMaxLength(2048);
 
             builder.Property(m => m.ProductionCost)
-                .IsRequired(false)
                 .HasDefaultValue(0);
-
-            builder.Property(m => m.Length)
-                .IsRequired(false);
 
             builder.Property(m => m.PictureUri)
                 .IsRequired(false);
 
             builder.Property(m => m.Rating)
-                .IsRequired(false)
                 .HasDefaultValue(0)
                 .HasAnnotation("MaxValue", 10);
         }

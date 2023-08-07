@@ -14,6 +14,7 @@ namespace Domain.Entities.FavoritesAggregate
         {
             CustomerId = id;
         }
+        public Favorites() { }
 
         public void AddMovieToFavorites(int movieId, int rating, string? review)
         {

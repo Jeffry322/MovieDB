@@ -15,6 +15,8 @@ namespace Domain.Entities.WatchlistAggregate
             CustomerId = id;
         }
 
+        public Watchlist() { }
+
         public void AddMovieToWatchlist(int movieId, bool isWatched)
         {
             if (!WatchlistMovies.Any(x => x.MovieId == movieId))
