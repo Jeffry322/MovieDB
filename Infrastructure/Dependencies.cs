@@ -15,7 +15,6 @@ namespace Infrastructure
 
             services.AddDbContext<IdentityDbContext>(c =>
                            c.UseNpgsql(config.GetConnectionString("IdentityConnection")));
-
         }
     }
 }

@@ -33,6 +33,12 @@ namespace Infrastructure.Data.Config
             builder.Property(m => m.Rating)
                 .HasDefaultValue(0)
                 .HasAnnotation("MaxValue", 10);
+
+            builder.Property(m => m.ReleaseDate)
+                .HasConversion(
+            src => src.Kind == DateTimeKind.Utc ? src : DateTime.SpecifyKind(src, DateTimeKind.Utc),
+            dst => dst.Kind == DateTimeKind.Utc ? dst : DateTime.SpecifyKind(dst, DateTimeKind.Utc)
+            );
         }
     }
 }

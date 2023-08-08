@@ -8,6 +8,7 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Actor> builder)
         {
+
             builder.Property(actor => actor.Fullname)
                 .IsRequired()
                 .HasMaxLength(256);
@@ -19,6 +20,12 @@ namespace Infrastructure.Data.Config
             builder.Property(actor => actor.PictureUri)
                 .IsRequired(false)
                 .HasMaxLength(2048);
+
+            builder.Property(actor => actor.DateOfBirth)
+                .HasConversion(
+            src => src.Kind == DateTimeKind.Utc ? src : DateTime.SpecifyKind(src, DateTimeKind.Utc),
+            dst => dst.Kind == DateTimeKind.Utc ? dst : DateTime.SpecifyKind(dst, DateTimeKind.Utc)
+            );
         }
     }
 }

@@ -8,12 +8,6 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<MovieCast> builder)
         {
-            builder.HasOne(mc => mc.ActorId)
-                .WithMany()
-                .HasForeignKey(mc => mc.ActorId)
-                .OnDelete(DeleteBehavior.Cascade);
-                
-
             builder.Property(mc => mc.Role)
                 .IsRequired()
                 .HasMaxLength(256);

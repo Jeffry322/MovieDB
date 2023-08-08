@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Infrastructure.Identity
 {
-    public class IdentityDbContext : DbContext
+    public class IdentityDbContext : IdentityDbContext<ApplicationUser>
     {
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options) { }
 
