@@ -25,7 +25,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"> Registration</a>
+                        </li>
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div>
+                            You've logined in as @User.Identity.Name
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
