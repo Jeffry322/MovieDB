@@ -4,5 +4,6 @@ namespace Infrastructure.Identity
 {
     public class ApplicationUser : IdentityUser
     {
+        public byte[]? ProfilePicture { get; set; }
     }
 }

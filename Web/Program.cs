@@ -37,9 +37,21 @@ if (!app.Environment.IsDevelopment())
 
 using (var scope = app.Services.CreateScope())
 {
-    var appContext = scope.ServiceProvider.GetRequiredService<Infrastructure.Data.AppDbContext>();
+    try
+    {
+        var appContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await AppDbContextSeed.SeedAsync(appContext, app.Logger);
 
-    await AppDbContextSeed.SeedAsync(appContext, app.Logger);
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var identityContext = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
+
+        await IdentityDbContextSeed.SeedAsync(identityContext, userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred while seeding the database.");
+    }
 }
 
 app.UseHttpsRedirection();
