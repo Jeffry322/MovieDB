@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,14 +26,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (!User!.Identity!.IsAuthenticated)
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"> Registration</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"> Login</a>
+                            </li>
+                        }
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <div>
-                            You've logined in as @User.Identity.Name
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manage" asp-action="MyAccount"> You logged in as @User.Identity.Name</a>
                         </div>
                     }
                 </div>

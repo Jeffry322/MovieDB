@@ -1,0 +1,32 @@
+﻿
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Account Information";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Username</h4>
+    <p>@Model.Username</p>
+</div>
+<div>
+    <h4>Email</h4>
+    <p>@Model.Email</p>
+</div>
+<div>
+    <h4>Profile Picture</h4>
+    <img src="@Model.ImagePreviewBase64" alt="Profile Picture" class="profile-picture" />
+</div>
+<div>
+    <form method="post">
+        <button type="submit" class="btn btn-primary" asp-area="Identity" asp-page="/Account/Logout">Logout</button>
+    </form>
+</div>
+
+<style>
+    .profile-picture {
+        width: 248px;
+        height: 224px;
+    }
+</style>
