@@ -1,6 +1,4 @@
-﻿using Domain.Interfaces;
-
-namespace Domain.Entities.WatchlistAggregate
+﻿namespace Domain.Entities.WatchlistAggregate
 {
     public class WatchlistMovie : BaseEntity
     {
