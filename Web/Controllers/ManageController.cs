@@ -37,7 +37,7 @@ namespace Web.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                ImagePreviewBase64 = $"data:image/png;base64,{Convert.ToBase64String(imageBytes!)}"
+                ImagePreviewBase64 = $"data:image/pngbase64,{Convert.ToBase64String(imageBytes!)}"
             };
 
             return View(model);
