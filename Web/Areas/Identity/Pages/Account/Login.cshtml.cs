@@ -55,7 +55,8 @@ namespace Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input!.Username!, Input!.Password!,
+                var user = await _signInManager.UserManager.FindByEmailAsync(Input!.Username!);
+                var result = await _signInManager.PasswordSignInAsync(user.UserName, Input!.Password!,
                 Input.RememberMe, lockoutOnFailure: false);
 
                 if (result.Succeeded)

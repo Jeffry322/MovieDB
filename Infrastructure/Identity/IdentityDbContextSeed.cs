@@ -4,9 +4,7 @@ namespace Infrastructure.Identity
 {
     public sealed class IdentityDbContextSeed
     {
-        public static async Task SeedAsync(IdentityDbContext context,
-            UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             await roleManager.CreateAsync(new IdentityRole(AuthorizationConstants.Constants.ADMIN_ROLE));
 

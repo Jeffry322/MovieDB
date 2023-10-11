@@ -19,4 +19,43 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: slategrey;
+}
+
+.movie-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movie-preview-item {
+    padding: 20px;
+    word-break: keep-all;
+}
+
+.movie-preview-textbox {
+    line-height: 20px;
+    font-size: 20px;
+    text-align: left;
+    color: black;
+}
+
+.movie-preview-textbox h3 {
+    width: 100px;
+    height: fit-content;
+    font-size: 20px;
+}
+
+.movie-preview-textbox p {
+    height: 3px;
+    font-size: 15px;
+}
+
+.poster-preview {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
 }

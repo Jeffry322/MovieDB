@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MoviePreviewViewModel>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+<div class="movie-preview">
+    @foreach (var movie in Model)
+    {
+        <div class="movie-preview-item">
+            <div class="movie-preview-textbox">
+                <img src="@movie.PosterPath" alt="Movie Poster" class="poster-preview" style="width: 128px;height:234px" />
+                <h3 class="movie-preview-text">@movie.Title</h3>
+                <p class="movie-preview-text">@movie.ReleaseDate</p>
+                <p class="movie-preview-text">@movie.VoteAverage</p>
+            </div>
+        </div>
+    }
+</div>
+   
