@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces;
 using TMDbLib.Client;
+using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 
 namespace Web.Services
@@ -7,6 +8,11 @@ namespace Web.Services
     public sealed class MovieSearchService : IMovieSearchService
     {
         private TMDbClient _client = new TMDbClient(Environment.GetEnvironmentVariable("tmdb_api_key"));
+
+        public async Task<Movie> GetMovieAsync(int movieId)
+        {
+            return await _client.GetMovieAsync(movieId);
+        }
 
         public async Task<IEnumerable<SearchMovie>> SearchAsync(string query)
         {

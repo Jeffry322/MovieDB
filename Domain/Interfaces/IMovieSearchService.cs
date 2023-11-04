@@ -1,4 +1,5 @@
-﻿using TMDbLib.Objects.Search;
+﻿using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.Search;
 
 namespace Domain.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Domain.Interfaces
     {
         Task<IEnumerable<SearchMovie>> SearchAsync(string query);
         Task<IEnumerable<SearchMovie>> GetTrendingMovies();
+        Task<Movie> GetMovieAsync(int movieId);
     }
 }

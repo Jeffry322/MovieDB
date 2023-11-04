@@ -3,6 +3,7 @@ using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Web.Abstractions.Interfaces;
 using Web.Interfaces;
 using Web.Services;
 
@@ -16,6 +17,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IMovieSearchService, MovieSearchService>();
 builder.Services.AddScoped<IMoviePreviewModelService, MoviePreviewModelService>();
 builder.Services.AddScoped<IUriComposer, UriComposer>();
+builder.Services.AddScoped<IMovieDetailsViewModelService, MovieDetailsViewModelService>();
 
 Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 

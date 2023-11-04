@@ -1,9 +1,9 @@
-﻿using Domain.Entities.FavoritesAggregate;
-using Domain.Entities.WatchlistAggregate;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Web.Abstractions.Interfaces;
 using Web.Interfaces;
+using Ardalis.GuardClauses;
 
 namespace Web.Controllers
 {
@@ -12,25 +12,35 @@ namespace Web.Controllers
     {
         private readonly IMovieSearchService _movieSearchService;
         private readonly IMoviePreviewModelService _moviePreviewModelService;
-        private readonly IRepository<Watchlist> _watchlistRepositort;
-        private readonly IRepository<Favorites> _favoritesRepository;
+        private readonly IMovieDetailsViewModelService _movieDetailsViewModelService;
 
-        public MovieController(IRepository<Favorites> favoritesRepository,
-            IRepository<Watchlist> watchlistRepositort,
-            IMovieSearchService movieSearchService,
-            IMoviePreviewModelService moviePreviewModelService)
+        public MovieController(IMovieSearchService movieSearchService,
+            IMoviePreviewModelService moviePreviewModelService,
+            IMovieDetailsViewModelService movieDetailsViewModelService)
         {
-            _favoritesRepository = favoritesRepository;
-            _watchlistRepositort = watchlistRepositort;
             _movieSearchService = movieSearchService;
             _moviePreviewModelService = moviePreviewModelService;
+            _movieDetailsViewModelService = movieDetailsViewModelService;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var trendingMovies = await _moviePreviewModelService.GetTrendingMovies();
+
+            Guard.Against.NullOrEmpty(trendingMovies, nameof(trendingMovies));
+
             return View(trendingMovies.Take(26));
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int movieId)
+        {
+            var movie = await _movieDetailsViewModelService.GetMovieDetailsViewModel(movieId);
+
+            Guard.Against.Null(movie, nameof(movie));
+
+            return View(movie);
         }
     }
 }
