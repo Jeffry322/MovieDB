@@ -1,5 +1,4 @@
-﻿using Domain.Interfaces;
-using TMDbLib.Client;
+﻿using TMDbLib.Client;
 using Web.Interfaces;
 
 namespace Web.Services

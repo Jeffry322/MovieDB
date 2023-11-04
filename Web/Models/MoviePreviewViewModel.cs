@@ -1,14 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Web.Abstractions;
 
 namespace Web.Models
 {
-    public sealed class MoviePreviewViewModel
+    public sealed class MoviePreviewViewModel : MovieViewModelBase
     {
-        [Required]
-        public string Title { get; set; }
-        [Required]
-        public string PosterPath { get; set; }
-        public string ReleaseDate { get; set; }
-        public float VoteAverage { get; set; }
     }
 }

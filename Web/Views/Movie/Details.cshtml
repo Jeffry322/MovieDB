@@ -1,0 +1,14 @@
+﻿@model MovieDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="moive-details-container">
+    <div>
+        <img src="@Model.PosterPath" alt="Movie Poster" class="poster-details" style="width: 300px;height:424px" />
+    </div>
+    <div>
+        <h3>@Model.Title</h3>
+    </div>
+</div>
