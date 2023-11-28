@@ -4,11 +4,41 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="moive-details-container">
-    <div>
+<div class="movie-details-container">
+    <div style="padding-right: 10px">
         <img src="@Model.PosterPath" alt="Movie Poster" class="poster-details" style="width: 300px;height:424px" />
     </div>
     <div>
-        <h3>@Model.Title</h3>
+        <h3>
+            @Model.Title
+            <span style="font-weight:normal">
+                (@Model.ReleaseDate.Year)
+            </span>
+        </h3>
+        <p>
+            <strong><span style="font-style: italic">@Model.Tagline</span></strong>
+        </p>
+        <p>
+            <strong>Genres:</strong>
+            @foreach (var genre in Model.Genres)
+            {
+                @genre.Name
+                if (genre != Model.Genres.Last())
+                {
+                    @:•
+                }
+            }
+            <strong> | Runtime:</strong> @Model.Runtime minutes
+        </p>
+        <p>
+            <strong>Vote Average:</strong> @Math.Round(Model.VoteAverage, 1) ★
+        </p>
+        <p>
+            <h4>Overview</h4>
+        </p>
+        <p style="width: 900px">@Model.Overview</p>
+        <div style="width: 900px">
+            <strong>Director:</strong> @Model.Credits.Crew.Where(c => c.KnownForDepartment == "Directing").Take(1)).Name
+        </div>
     </div>
 </div>
