@@ -28,7 +28,7 @@ namespace Infrastructure.Data
         public async Task<T> FirstOrDeffaultAsync(Expression<Func<T, bool>> predicate)
         {
             var result = await _context.Set<T>().FirstOrDefaultAsync(predicate);
-            if (result == null) throw new EntityNotFoundException();
+
             return result;
         }
 

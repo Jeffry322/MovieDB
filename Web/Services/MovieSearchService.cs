@@ -25,5 +25,11 @@ namespace Web.Services
             var results = await _client.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week);
             return results.Results;
         }
+
+        public async Task<Credits> GetCreditsAsync(int movieId)
+        {
+            var result = await _client.GetMovieCreditsAsync(movieId);
+            return result;
+        }
     }
 }

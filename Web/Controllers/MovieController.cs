@@ -4,23 +4,29 @@ using Microsoft.AspNetCore.Mvc;
 using Web.Abstractions.Interfaces;
 using Web.Interfaces;
 using Ardalis.GuardClauses;
+using Domain.Entities.FavoritesAggregate;
+using Domain.Entities.WatchlistAggregate;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
     [Authorize]
     public class MovieController : Controller
     {
-        private readonly IMovieSearchService _movieSearchService;
         private readonly IMoviePreviewModelService _moviePreviewModelService;
         private readonly IMovieDetailsViewModelService _movieDetailsViewModelService;
+        private readonly IRepository<Favorites> _favoritesRepository;
+        private readonly IRepository<Watchlist> _watchlistRepository;
 
-        public MovieController(IMovieSearchService movieSearchService,
-            IMoviePreviewModelService moviePreviewModelService,
-            IMovieDetailsViewModelService movieDetailsViewModelService)
+        public MovieController(IMoviePreviewModelService moviePreviewModelService,
+            IMovieDetailsViewModelService movieDetailsViewModelService,
+            IRepository<Favorites> favoritesRepository,
+            IRepository<Watchlist> watchlistRepository)
         {
-            _movieSearchService = movieSearchService;
             _moviePreviewModelService = moviePreviewModelService;
             _movieDetailsViewModelService = movieDetailsViewModelService;
+            _favoritesRepository = favoritesRepository;
+            _watchlistRepository = watchlistRepository;
         }
 
         [AllowAnonymous]
@@ -41,6 +47,22 @@ namespace Web.Controllers
             Guard.Against.Null(movie, nameof(movie));
 
             return View(movie);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Favorites()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+            var favorites = await _favoritesRepository.FirstOrDeffaultAsync(f => f.CustomerId == userId);
+
+            if (favorites == null)
+            {
+                favorites = new Favorites(userId);
+                await _favoritesRepository.AddAsync(favorites);
+            }
+
+            return View(favorites);
         }
     }
 }

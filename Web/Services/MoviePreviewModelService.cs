@@ -30,8 +30,8 @@ namespace Web.Services
                     MovieId = movie.Id,
                     Title = movie.Title,
                     PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w342),
-                    ReleaseDate = movie.ReleaseDate!.Value.ToString("d MMM yyyy", new CultureInfo("en-US"))
-                });
+                    ReleaseDate = movie.ReleaseDate!.Value
+                }); 
             }
 
             return result;
