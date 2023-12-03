@@ -8,10 +8,10 @@ namespace Web.Services
 {
     public class MoviePreviewModelService : IMoviePreviewModelService
     {
-        private readonly IMovieSearchService _movieSearchService;
+        private readonly ISearchService _movieSearchService;
         private readonly IUriComposer _uriComposer;
 
-        public MoviePreviewModelService(IMovieSearchService movieSearchService,
+        public MoviePreviewModelService(ISearchService movieSearchService,
             IUriComposer uriComposer)
         {
             _movieSearchService = movieSearchService;

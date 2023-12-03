@@ -14,7 +14,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IMovieSearchService, MovieSearchService>();
+builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IMoviePreviewModelService, MoviePreviewModelService>();
 builder.Services.AddScoped<IUriComposer, UriComposer>();
 builder.Services.AddScoped<IMovieDetailsViewModelService, MovieDetailsViewModelService>();

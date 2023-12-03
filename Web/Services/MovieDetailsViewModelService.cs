@@ -7,11 +7,11 @@ namespace Web.Services
 {
     public sealed class MovieDetailsViewModelService : IMovieDetailsViewModelService
     {
-        private readonly IMovieSearchService _movieSearchService;
+        private readonly ISearchService _movieSearchService;
         private readonly IUriComposer _uriComposer;
 
         public MovieDetailsViewModelService(IUriComposer uriComposer,
-            IMovieSearchService movieSearchService)
+            ISearchService movieSearchService)
         {
             _uriComposer = uriComposer;
             _movieSearchService = movieSearchService;
