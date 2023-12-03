@@ -1,11 +1,12 @@
 ﻿using Domain.Interfaces;
 using TMDbLib.Client;
+using TMDbLib.Objects.Credit;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 
 namespace Web.Services
 {
-    public sealed class MovieSearchService : IMovieSearchService
+    public sealed class SearchService : ICreditsSearchService, IMovieSearchService
     {
         private TMDbClient _client = new TMDbClient(Environment.GetEnvironmentVariable("tmdb_api_key"));
 
@@ -24,6 +25,17 @@ namespace Web.Services
         {
             var results = await _client.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week);
             return results.Results;
+        }
+
+        public async Task<Credits> GetCreditsAsync(int movieId)
+        {
+            var result = await _client.GetMovieCreditsAsync(movieId);
+            return result;
+        }
+
+        public Task<Credit> SearchCredits(int movieId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

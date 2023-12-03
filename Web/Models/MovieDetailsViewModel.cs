@@ -8,8 +8,8 @@ namespace Web.Models
     public class MovieDetailsViewModel : MovieViewModelBase
     {
         [Required]
-        [StringLength(500)]
         public string? Overview { get; set; }
+        public string? Tagline { get; set; }
         public long Budget { get; set; } 
         public int? Runtime { get; set; }
         public IEnumerable<Genre> Genres { get; set; }

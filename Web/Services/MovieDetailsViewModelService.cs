@@ -7,11 +7,11 @@ namespace Web.Services
 {
     public sealed class MovieDetailsViewModelService : IMovieDetailsViewModelService
     {
-        private readonly IMovieSearchService _movieSearchService;
+        private readonly ISearchService _movieSearchService;
         private readonly IUriComposer _uriComposer;
 
         public MovieDetailsViewModelService(IUriComposer uriComposer,
-            IMovieSearchService movieSearchService)
+            ISearchService movieSearchService)
         {
             _uriComposer = uriComposer;
             _movieSearchService = movieSearchService;
@@ -20,16 +20,19 @@ namespace Web.Services
         public async Task<MovieDetailsViewModel> GetMovieDetailsViewModel(int movieId)
         {
             var movie = await _movieSearchService.GetMovieAsync(movieId);
+            var credits = await _movieSearchService.GetCreditsAsync(movieId);
 
             var model  = new MovieDetailsViewModel
             {
                 MovieId = movie.Id,
                 Title = movie.Title,
                 Overview = movie.Overview,
+                Tagline = movie.Tagline,
+                ReleaseDate = movie.ReleaseDate!.Value,
                 Budget = movie.Budget,
                 Runtime = movie.Runtime,
                 Genres = movie.Genres,
-                Credits = movie.Credits,
+                Credits = credits,
                 VoteAverage = movie.VoteAverage,
                 PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w780)
             };

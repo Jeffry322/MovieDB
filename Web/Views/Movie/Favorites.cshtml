@@ -1,0 +1,20 @@
+﻿@model Favorites
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+@if (Model.FavoriteMovie.Count == 0)
+{
+    <h2>You have no favorite movies</h2>
+}
+else
+{
+    <h2>Your favorite movies</h2>
+    <ul>
+        @foreach (var movie in Model.FavoriteMovie)
+        {
+            
+        }
+    </ul>
+})

@@ -11,7 +11,7 @@ namespace Web.Abstractions
         [Required]
         public string PosterPath { get; set; }
         [Required]
-        public string ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public double VoteAverage { get; set; }
     }
 }
