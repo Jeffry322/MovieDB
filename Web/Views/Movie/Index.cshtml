@@ -9,9 +9,9 @@
         <div class="movie-preview-item">
             <div class="movie-preview-textbox">
                 <img src="@movie.PosterPath" alt="Movie Poster" class="poster-preview" style="width: 128px;height:234px" />
-                <h3 class="movie-preview-text"> @Html.ActionLink(movie.Title, "Details", "Movie", new {movieId = movie.MovieId})</h3>
-                <p class="movie-preview-text">@movie.ReleaseDate</p>
-                <p class="movie-preview-text">@movie.VoteAverage</p>
+                <h3 class="movie-preview-text" style="text-decoration: none;"> @Html.ActionLink(movie.Title, "Details", "Movie", new {movieId = movie.MovieId})</h3>
+                <p class="movie-preview-text">@movie.ReleaseDate.Date.ToShortDateString()</p>
+                <p class="movie-preview-text">@Math.Round(movie.VoteAverage, 1) ★</p>
             </div>
         </div>
     }

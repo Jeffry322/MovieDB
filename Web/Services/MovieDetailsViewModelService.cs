@@ -30,6 +30,7 @@ namespace Web.Services
                 Tagline = movie.Tagline,
                 ReleaseDate = movie.ReleaseDate!.Value,
                 Budget = movie.Budget,
+                Revenue = movie.Revenue,
                 Runtime = movie.Runtime,
                 Genres = movie.Genres,
                 Credits = credits,

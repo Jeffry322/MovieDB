@@ -20,25 +20,56 @@
         </p>
         <p>
             <strong>Genres:</strong>
-            @foreach (var genre in Model.Genres)
-            {
-                @genre.Name
-                if (genre != Model.Genres.Last())
-                {
-                    @:•
-                }
-            }
+            @string.Join(" • ", Model.Genres.Select(g => g.Name))
             <strong> | Runtime:</strong> @Model.Runtime minutes
         </p>
         <p>
             <strong>Vote Average:</strong> @Math.Round(Model.VoteAverage, 1) ★
+            @if (Model.Budget != 0)
+            {
+                <strong> | Budget</strong> @Model.Budget.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))
+            }
+            @if (Model.Revenue != 0)
+            {
+                <strong> | Revenue</strong> @Model.Revenue.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))
+            }
         </p>
         <p>
             <h4>Overview</h4>
         </p>
         <p style="width: 900px">@Model.Overview</p>
         <div style="width: 900px">
-            <strong>Director:</strong> @Model.Credits.Crew.Where(c => c.KnownForDepartment == "Directing").Take(1)).Name
+            @{
+                var directors = Model.Credits.Crew.Where(c => c.Job == "Director").Select(d => d.Name);
+                var producers = Model.Credits.Crew.Where(c => c.Job == "Producer").Select(d => d.Name);
+                var writers = Model.Credits.Crew.Where(c => c.Job == "Writer").Select(d => d.Name);
+                var screenplay = Model.Credits.Crew.Where(c => c.Job == "Screenplay").Select(d => d.Name);
+
+                <p>
+                    <strong>Director:</strong> @string.Join(" • ", directors)
+                </p>
+
+                if (producers.Any())
+                {
+                    <p>
+                        <strong>Producers:</strong> @string.Join(" • ", producers)
+                    </p>
+                }
+
+                if (writers.Any())
+                {
+                    <p>
+                        <strong>Writers:</strong> @string.Join(" • ", writers)
+                    </p>
+                }
+
+                if (screenplay.Any())
+                {
+                    <p>
+                        <strong>Screenplay:</strong> @string.Join(" • ", screenplay)
+                    </p>
+                }
+            }
         </div>
     </div>
 </div>

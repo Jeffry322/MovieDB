@@ -6,7 +6,7 @@ using TMDbLib.Objects.Search;
 
 namespace Web.Services
 {
-    public sealed class SearchService : ICreditsSearchService, IMovieSearchService
+    public sealed class SearchService : ISearchService
     {
         private TMDbClient _client = new TMDbClient(Environment.GetEnvironmentVariable("tmdb_api_key"));
 

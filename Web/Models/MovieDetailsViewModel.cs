@@ -10,7 +10,8 @@ namespace Web.Models
         [Required]
         public string? Overview { get; set; }
         public string? Tagline { get; set; }
-        public long Budget { get; set; } 
+        public long Budget { get; set; }
+        public long Revenue { get; set; }
         public int? Runtime { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public Credits? Credits { get; set; }

@@ -29,6 +29,7 @@ namespace Web.Services
                 {
                     MovieId = movie.Id,
                     Title = movie.Title,
+                    VoteAverage = movie.VoteAverage,
                     PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w342),
                     ReleaseDate = movie.ReleaseDate!.Value
                 }); 
