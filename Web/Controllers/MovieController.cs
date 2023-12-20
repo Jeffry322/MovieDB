@@ -36,7 +36,7 @@ namespace Web.Controllers
 
             Guard.Against.NullOrEmpty(trendingMovies, nameof(trendingMovies));
 
-            return View(trendingMovies.Take(26));
+            return View(trendingMovies.Take(18));
         }
 
         [AllowAnonymous]
