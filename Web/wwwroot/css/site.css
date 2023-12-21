@@ -78,3 +78,39 @@ body {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 10px;
 }
+
+.scrollmenu {
+    overflow: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.card {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    width: 200px;
+    height: fit-content;
+    padding: 14px;
+    text-decoration: none;
+}
+
+    .card img {
+        width: 100px;
+        height: 170px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.5);
+    }
+.name-role {
+    color: black;
+    height: 70px;
+    white-space: normal;
+    overflow: hidden;
+    text-align: left;
+    overflow: hidden;
+}

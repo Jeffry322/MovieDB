@@ -1,9 +1,12 @@
-﻿using TMDbLib.Objects.Credit;
+﻿using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.People;
 
 namespace Domain.Interfaces
 {
     public interface ICreditsSearchService
     {
-        public Task<Credit> SearchCredits (int movieId);
+        public Task<Credits> GetCreditsAsync (int movieId);
+
+        public Task<Person> GetPersonAsync (int personId);
     }
 }
