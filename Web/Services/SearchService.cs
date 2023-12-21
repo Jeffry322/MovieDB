@@ -2,6 +2,7 @@
 using TMDbLib.Client;
 using TMDbLib.Objects.Credit;
 using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.People;
 using TMDbLib.Objects.Search;
 
 namespace Web.Services
@@ -33,9 +34,11 @@ namespace Web.Services
             return result;
         }
 
-        public Task<Credit> SearchCredits(int movieId)
+        public async Task<Person> GetPersonAsync(int personId)
         {
-            throw new NotImplementedException();
+            var person = await _client.GetPersonAsync(personId);
+
+            return person;
         }
     }
 }

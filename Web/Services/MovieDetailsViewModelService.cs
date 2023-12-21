@@ -38,6 +38,11 @@ namespace Web.Services
                 PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w780)
             };
 
+            foreach (var cast in model.Credits.Cast)
+            {
+                cast.ProfilePath = await _uriComposer.ComposePicUri(cast.ProfilePath, PosterSize.w185);
+            }
+
             return model;
         }
     }
