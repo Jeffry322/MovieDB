@@ -8,5 +8,7 @@ namespace Domain.Interfaces
         public Task<Credits> GetCreditsAsync (int movieId);
 
         public Task<Person> GetPersonAsync (int personId);
+
+        public Task<MovieCredits> GetAssociatedMoviesForPersonAsync(int personId);
     }
 }

@@ -1,0 +1,89 @@
+﻿@using System.Globalization;
+@model Person
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@{
+    int CalculateAge(DateTime dateOfBirth, DateTime currentDate)
+    {
+        int age = currentDate.Year - dateOfBirth.Year;
+        if (currentDate.Month < dateOfBirth.Month || (currentDate.Month == dateOfBirth.Month && currentDate.Day < dateOfBirth.Day))
+        {
+            age--;
+        }
+        return age;
+    }
+}
+
+<div class="movie-details-container">
+    <div class="info-column">
+        <img class="person-details-photo" src="@Model.ProfilePath" alt="Photo" />
+        <div class="caption">
+            <h4>Personal Info</h4>
+            <p><strong>Known For</strong></p>
+            <p>@Model.KnownForDepartment</p>
+
+            <p><strong>Date of Birth</strong></p>
+            <p>
+                @Model.Birthday.Value.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-Us"))
+                (@CalculateAge(Model.Birthday.Value, DateTime.UtcNow) years old)
+            </p>
+
+            @if (Model.Deathday.HasValue)
+            {
+                <p><strong>Date of Death</strong></p>
+                <p>@Model.Deathday.Value.ToString("MMMM dd, yyyy", CultureInfo.CreateSpecificCulture("en-Us"))</p>
+            }
+
+            <p><strong>Place of Birth</strong></p>
+            <p>@Model.PlaceOfBirth</p>
+
+            <p><strong>Gender</strong></p>
+            <p>@Model.Gender</p>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>
+            @Model.Name
+        </h3>
+        <p>
+            <strong>Biography:</strong>
+        </p>
+        <div id="ReadMore">
+            <p style="width: 900px">@Model.Biography.Substring(0, 500)</p>
+        </div>
+        <div id="ReadLess">
+            <p style="width: 900px">@Model.Biography</p>
+        </div>
+        <span id="dots">...</span>
+        <button onclick="myFunction()" id="myBtn">Read more</button>
+    </div>
+
+    @await Component.InvokeAsync("ScrollMenu", new { personId = Model.Id })
+</div>
+
+
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var btnText = document.getElementById("myBtn");
+        var ReadMore = document.getElementById("ReadMore");
+        var ReadLess = document.getElementById("ReadLess");
+
+        if (ReadMore.style.display === "none") {
+            dots.style.display = "inline";
+            ReadLess.style.display = "none";
+            btnText.innerHTML = "Read More";
+            ReadMore.style.display = "inline";
+        } else {
+            dots.style.display = "none";
+            ReadMore.style.display = "none";
+            btnText.innerHTML = "Read less";
+            ReadLess.style.display = "inline";
+        }
+    }
+</script>

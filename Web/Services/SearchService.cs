@@ -40,5 +40,11 @@ namespace Web.Services
 
             return person;
         }
+
+        public async Task<MovieCredits> GetAssociatedMoviesForPersonAsync(int personId)
+        {
+            var results = await _client.GetPersonMovieCreditsAsync(personId);
+            return results;
+        }
     }
 }
