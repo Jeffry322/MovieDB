@@ -1,0 +1,16 @@
+﻿@model MovieCredits
+
+<div class="scrollmenu">
+    @foreach (var movie in Model.Cast)
+    {
+        <div class="card">
+            <a href="@Url.Action("Details", "Movie", new { movieId = movie.Id })">
+                <img src="@movie.PosterPath" alt="Actor Profile" style="width:100%">
+            </a>
+            <div class="name-role">
+                <strong><b>@movie.Title</b></strong>
+                <p>@movie.Character</p>
+            </div>
+        </div>
+    }
+</div>
