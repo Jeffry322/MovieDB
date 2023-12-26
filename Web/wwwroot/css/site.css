@@ -84,38 +84,37 @@ body {
     overflow-y: hidden;
     white-space: nowrap;
     width: 100%;
-    height: 100%;
+    height: auto;
     margin-top: 10px;
-    border-radius: 10px;
 }
 
-.card {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    width: 200px;
-    height: fit-content;
-    padding: 14px;
+.actor-preview-card {
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 154px;
+    height: 100%;
     text-decoration: none;
+    background-color: white;
 }
 
-    .card img {
-        width: 100px;
-        height: 170px;
+    .actor-preview-card img {
+        width: fit-content;
+        height: auto;
         object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.5);
     }
+
 .name-role {
+    width: 200px;
+    height: 60px;
+    font-size: 13px;
+    margin: 4px;
     color: black;
-    height: 70px;
+    text-align: left;
     white-space: normal;
     overflow: hidden;
-    text-align: left;
-    overflow: hidden;
 }
 
-.person-details-photo{
+.person-details-photo {
     width: 300px;
     height: 424px;
     object-fit: cover;

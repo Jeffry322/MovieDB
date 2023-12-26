@@ -75,9 +75,9 @@
     <div class="scrollmenu">
         @foreach (var actor in Model.Credits.Cast.Take(10))
         {
-            <div class="card">
+            <div class="actor-preview-card">
                 <a href="@Url.Action("Details", "People", new { personId = actor.Id })">
-                    <img src="@actor.ProfilePath" alt="Actor Profile" style="width:100%">
+                    <img src="@actor.ProfilePath" alt="Actor">
                 </a>
                 <div class="name-role">
                     <strong><b>@actor.Name</b></strong>
@@ -85,7 +85,7 @@
                 </div>
             </div>
         }
-        <div class="card">
+        <div class="actor-preview-card">
             <a href="@Url.Action("GetMovieCast", "People", new { movieId = Model.MovieId })">
                 <strong>See Full Cast...</strong>
             </a>
