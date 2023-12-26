@@ -40,7 +40,7 @@ namespace Web.Services
 
             foreach (var cast in model.Credits.Cast)
             {
-                cast.ProfilePath = await _uriComposer.ComposePicUri(cast.ProfilePath, PosterSize.w185);
+                cast.ProfilePath = await _uriComposer.ComposePicUri(cast.ProfilePath, PosterSize.w154);
             }
 
             return model;
