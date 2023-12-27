@@ -54,36 +54,47 @@
             <strong>Biography:</strong>
         </p>
         <div id="ReadMore">
-            <p style="width: 900px">@Model.Biography.Substring(0, 500)</p>
+            @if (Model.Biography.Length > 500)
+            {
+                <p style="width: 900px">@Model.Biography.Substring(0, 500)</p>
+            }
+            else
+            {
+                <p style="width: 900px">@Model.Biography</p>
+            }
         </div>
-        <div id="ReadLess">
+        <div id="ReadLess" style="display: none;">
             <p style="width: 900px">@Model.Biography</p>
         </div>
-        <span id="dots">...</span>
-        <button onclick="myFunction()" id="myBtn">Read more</button>
+        @if (Model.Biography.Length > 500)
+        {
+            <span id="dots">...</span>
+            <button onclick="toggleBio()" id="myBtn">Read more</button>
+        }
     </div>
 
     @await Component.InvokeAsync("ScrollMenu", new { personId = Model.Id })
+
 </div>
 
 
 <script>
-    function myFunction() {
+    function toggleBio() {
         var dots = document.getElementById("dots");
         var btnText = document.getElementById("myBtn");
-        var ReadMore = document.getElementById("ReadMore");
-        var ReadLess = document.getElementById("ReadLess");
+        var readMoreDiv = document.getElementById("ReadMore");
+        var readLessDiv = document.getElementById("ReadLess");
 
-        if (ReadMore.style.display === "none") {
-            dots.style.display = "inline";
-            ReadLess.style.display = "none";
-            btnText.innerHTML = "Read More";
-            ReadMore.style.display = "inline";
-        } else {
+        if (readMoreDiv.style.display === "block") {
+            readMoreDiv.style.display = "none";
+            readLessDiv.style.display = "block";
             dots.style.display = "none";
-            ReadMore.style.display = "none";
             btnText.innerHTML = "Read less";
-            ReadLess.style.display = "inline";
+        } else {
+            readMoreDiv.style.display = "block";
+            readLessDiv.style.display = "none";
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
         }
     }
 </script>

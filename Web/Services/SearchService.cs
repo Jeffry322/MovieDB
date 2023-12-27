@@ -10,6 +10,12 @@ namespace Web.Services
     public sealed class SearchService : ISearchService
     {
         private TMDbClient _client = new TMDbClient(Environment.GetEnvironmentVariable("tmdb_api_key"));
+        private readonly CustomTMDBLibClient _customClient;
+
+        public SearchService(CustomTMDBLibClient customClient)
+        {
+            _customClient = customClient;
+        }
 
         public async Task<Movie> GetMovieAsync(int movieId)
         {
@@ -43,6 +49,8 @@ namespace Web.Services
 
         public async Task<MovieCredits> GetAssociatedMoviesForPersonAsync(int personId)
         {
+            var test = await _customClient.GetMovieCredits(personId);
+
             var results = await _client.GetPersonMovieCreditsAsync(personId);
             return results;
         }
