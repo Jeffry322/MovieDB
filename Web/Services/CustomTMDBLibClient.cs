@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using Web.Abstractions.Interfaces;
-using Web.Models;
+﻿using Domain.Extensions;
+using Newtonsoft.Json;
 
 namespace Web.Services
 {
@@ -13,7 +12,7 @@ namespace Web.Services
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public async Task<ExtendedCastModel> GetMovieCredits(int personId)
+        public async Task<CreditsExtension> GetMovieCredits(int personId)
         {
             var request = new HttpRequestMessage
             {
@@ -22,14 +21,17 @@ namespace Web.Services
             };
 
             request.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Environment.GetEnvironmentVariable("tmdb_api_key"));
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",
+                Environment.GetEnvironmentVariable("api_read_access_token"));
 
             using (var response = await _httpClient.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
                 var json = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<ExtendedCastModel>(json);
+                var obj = JsonConvert.DeserializeObject<CreditsExtension>(json);
+
+                return obj;
             }
         }
     }

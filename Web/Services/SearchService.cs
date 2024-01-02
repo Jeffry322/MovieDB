@@ -1,6 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Extensions;
+using Domain.Interfaces;
 using TMDbLib.Client;
-using TMDbLib.Objects.Credit;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
 using TMDbLib.Objects.Search;
@@ -30,6 +30,7 @@ namespace Web.Services
 
         public async Task<IEnumerable<SearchMovie>> GetTrendingMovies()
         {
+            var key = Environment.GetEnvironmentVariable("tmdb_api_key");
             var results = await _client.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week);
             return results.Results;
         }
@@ -47,11 +48,10 @@ namespace Web.Services
             return person;
         }
 
-        public async Task<MovieCredits> GetAssociatedMoviesForPersonAsync(int personId)
+        public async Task<CreditsExtension> GetAssociatedMoviesForPersonAsync(int personId)
         {
-            var test = await _customClient.GetMovieCredits(personId);
+            var results = await _customClient.GetMovieCredits(personId);
 
-            var results = await _client.GetPersonMovieCreditsAsync(personId);
             return results;
         }
     }

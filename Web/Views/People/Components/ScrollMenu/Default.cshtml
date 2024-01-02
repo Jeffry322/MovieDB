@@ -1,7 +1,7 @@
-﻿@model MovieCredits
+﻿@model CreditsExtension
 
 <div class="scrollmenu">
-    @foreach (var movie in Model.Cast)
+    @foreach (var movie in Model.Cast.Where(cast => cast.Order == 0 || cast.Order == 1))
     {
         <div class="actor-preview-card">
             <a href="@Url.Action("Details", "Movie", new { movieId = movie.Id })">
