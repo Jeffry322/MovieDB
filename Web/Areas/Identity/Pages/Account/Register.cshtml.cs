@@ -68,7 +68,7 @@ namespace Web.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser { UserName = Input?.UserName, Email = Input?.Email };
 
-                await PictureHandler(user);
+                /*await PictureHandler(user);*/
 
                 var result = await _userManager.CreateAsync(user, Input?.Password!);
                 if (result.Succeeded)
@@ -87,7 +87,7 @@ namespace Web.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private async Task PictureHandler(ApplicationUser user)
+        /*private async Task PictureHandler(ApplicationUser user)
         {
             if (Input?.ProfilePicture != null)
             {
@@ -116,6 +116,6 @@ namespace Web.Areas.Identity.Pages.Account
         {
             var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "default-profile-picture.png");
             return System.IO.File.ReadAllBytes(imagePath);
-        }
+        }*/
     }
 }

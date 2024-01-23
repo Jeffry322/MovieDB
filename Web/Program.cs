@@ -1,13 +1,19 @@
 using Domain.Interfaces;
 using Infrastructure.Data;
-using Infrastructure.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
 using Web.Abstractions.Interfaces;
 using Web.Interfaces;
 using Web.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure.Identity;
+
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ?? throw new InvalidOperationException("Connection string 'WebIdentityDbContextConnection' not found.");
+
+builder.Services.AddDbContext<IdentityDbContext>(options => options.UseNpgsql(connectionString));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDbContext>();
 
 // Add services to the container.
 builder.Services.AddHttpClient();
@@ -25,17 +31,8 @@ builder.Services.AddScoped<IMovieDetailsViewModelService, MovieDetailsViewModelS
 
 Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-        options.SlidingExpiration = true;
-        options.AccessDeniedPath = "/Account/AccessDenied";
-        options.LoginPath = "/Account/Login";
-        options.LogoutPath = "/Account/Logout";
-    });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+/*builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
            .AddEntityFrameworkStores<IdentityDbContext>();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
@@ -46,7 +43,7 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 0;
-});
+});*/
 
 
 var app = builder.Build();
@@ -64,10 +61,6 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCookiePolicy(new CookiePolicyOptions
-{
-    MinimumSameSitePolicy = SameSiteMode.Lax
-});
 
 app.MapRazorPages();
 

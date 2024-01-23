@@ -1,4 +1,4 @@
-﻿using Infrastructure.Identity;
+﻿/*using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,3 +44,4 @@ namespace Web.Controllers
         }
     }
 }
+*/

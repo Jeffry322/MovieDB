@@ -13,8 +13,8 @@ namespace Infrastructure
             services.AddDbContext<AppDbContext>(c =>
                 c.UseNpgsql(config.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<IdentityDbContext>(c =>
-                           c.UseNpgsql(config.GetConnectionString("IdentityConnection")));
+            /*services.AddDbContext<IdentityDbContext>(c =>
+                           c.UseNpgsql(config.GetConnectionString("IdentityConnection")));*/
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Web.Controllers
             return View(trendingMovies.Take(18));
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> Details(int movieId)
         {
             var movie = await _movieDetailsViewModelService.GetMovieDetailsViewModel(movieId);
