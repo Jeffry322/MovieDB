@@ -35,7 +35,8 @@ namespace Web.Services
                 Genres = movie.Genres,
                 Credits = credits,
                 VoteAverage = movie.VoteAverage,
-                PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w780)
+                PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w780),
+                Status = movie.Status
             };
 
             foreach (var cast in model.Credits.Cast)

@@ -4,8 +4,13 @@
     @foreach (var movie in Model.Cast.Where(cast => cast.Order == 0 || cast.Order == 1))
     {
         <div class="actor-preview-card">
+
+            @{
+                var posterPath = movie.PosterPath ?? Url.Content("~/Images/default-movie-poster.png");
+            }
+
             <a href="@Url.Action("Details", "Movie", new { movieId = movie.Id })">
-                <img src="@movie.PosterPath" alt="Movie Poster" style="width:100%">
+                <img src="@posterPath" alt="Movie Poster" style="width:100%">
             </a>
             <div class="name-role">
                 <strong><b>@movie.Title</b></strong>

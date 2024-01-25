@@ -15,5 +15,6 @@ namespace Web.Models
         public int? Runtime { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
         public Credits? Credits { get; set; }
+        public string? Status { get; set; }
     }
 }

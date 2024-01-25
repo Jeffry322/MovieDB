@@ -21,10 +21,22 @@
         <p>
             <strong>Genres:</strong>
             @string.Join(" • ", Model.Genres.Select(g => g.Name))
-            <strong> | Runtime:</strong> @Model.Runtime minutes
+
+            @if (Model.Runtime != 0)
+            {
+                <strong> | Runtime:</strong> @Model.Runtime <span>minutes</span>
+            }
         </p>
         <p>
-            <strong>Vote Average:</strong> @Math.Round(Model.VoteAverage, 1) ★
+            @if (Model.Status == "Released")
+            {
+                <strong>Vote Average:</strong> @Math.Round(Model.VoteAverage, 1) <span>♥</span>
+            }
+            else
+            {
+                <strong>Status:</strong> @Model.Status
+            }
+
             @if (Model.Budget != 0)
             {
                 <strong> | Budget</strong> @Model.Budget.ToString("C", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))
