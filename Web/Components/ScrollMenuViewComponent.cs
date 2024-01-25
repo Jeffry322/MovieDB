@@ -22,7 +22,10 @@ namespace Web.Components
 
             foreach (var movie in movies.Cast)
             {
-                movie.PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w154);
+                if (movie.PosterPath != null)
+                {
+                    movie.PosterPath = await _uriComposer.ComposePicUri(movie.PosterPath, PosterSize.w154);
+                }
             }
 
             //order movie by release date
