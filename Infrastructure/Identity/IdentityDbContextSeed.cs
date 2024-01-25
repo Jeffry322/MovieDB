@@ -1,4 +1,4 @@
-﻿/*using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Identity
 {
@@ -12,7 +12,6 @@ namespace Infrastructure.Identity
             {
                 UserName = "Sashka",
                 Email = "sashka@mail.com",
-                ProfilePicture = await File.ReadAllBytesAsync("wwwroot/images/default-profile-picture.png")
             };
 
             await userManager.CreateAsync(deffaultUser, AuthorizationConstants.Constants.DEFAULT_PASSWORD);
@@ -22,7 +21,6 @@ namespace Infrastructure.Identity
             {
                 UserName = "Admin",
                 Email = "admin@mail.com",
-                ProfilePicture = await File.ReadAllBytesAsync("wwwroot/images/default-profile-picture.png")
             };
 
             await userManager.CreateAsync(adminUser, AuthorizationConstants.Constants.DEFAULT_PASSWORD);
@@ -34,4 +32,3 @@ namespace Infrastructure.Identity
         }
     }
 }
-*/

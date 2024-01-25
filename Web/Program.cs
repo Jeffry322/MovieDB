@@ -9,11 +9,12 @@ using Infrastructure.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("IdentityConnection") ?? throw new InvalidOperationException("Connection string 'WebIdentityDbContextConnection' not found.");
 
-builder.Services.AddDbContext<IdentityDbContext>(options => options.UseNpgsql(connectionString));
+Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddDefaultUI()
+    .AddEntityFrameworkStores<IdentityDbContext>();
 
 // Add services to the container.
 builder.Services.AddHttpClient();
@@ -29,12 +30,6 @@ builder.Services.AddScoped<IMoviePreviewModelService, MoviePreviewModelService>(
 builder.Services.AddScoped<IUriComposer, UriComposer>();
 builder.Services.AddScoped<IMovieDetailsViewModelService, MovieDetailsViewModelService>();
 
-Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
-
-
-/*builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-           .AddEntityFrameworkStores<IdentityDbContext>();
-
 builder.Services.AddIdentityCore<ApplicationUser>(options =>
 {
     options.Password.RequireDigit = false;
@@ -43,10 +38,25 @@ builder.Services.AddIdentityCore<ApplicationUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 0;
-});*/
-
+});
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var scopedProvider = scope.ServiceProvider;
+    try
+    {
+        var userManager = scopedProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = scopedProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        await IdentityDbContextSeed.SeedAsync(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred seeding the DB.");
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

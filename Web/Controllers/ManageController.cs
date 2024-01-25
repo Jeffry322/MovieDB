@@ -1,4 +1,4 @@
-﻿/*using Infrastructure.Identity;
+﻿using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,17 +31,16 @@ namespace Web.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var imageBytes = user.ProfilePicture;
+            //var imageBytes = user.ProfilePicture;
 
             var model = new IndexViewModel
             {
                 Username = user.UserName,
                 Email = user.Email,
-                ImagePreviewBase64 = $"data:image/pngbase64,{Convert.ToBase64String(imageBytes!)}"
+                //ImagePreviewBase64 = $"data:image/pngbase64,{Convert.ToBase64String(imageBytes!)}"
             };
 
             return View(model);
         }
     }
 }
-*/

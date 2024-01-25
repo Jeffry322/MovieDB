@@ -26,8 +26,8 @@ namespace Web.Areas.Identity.Pages.Account
         public sealed class InputModel
         {
             [Required]
-            [Display(Name = "Username")]
-            public string? Username { get; set; }
+            [EmailAddress]
+            public string? Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
@@ -55,9 +55,9 @@ namespace Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = await _signInManager.UserManager.FindByEmailAsync(Input!.Username!);
-                var result = await _signInManager.PasswordSignInAsync(user.UserName, Input!.Password!,
-                Input.RememberMe, lockoutOnFailure: false);
+                var user = await _signInManager.UserManager.FindByEmailAsync(Input!.Email!);
+
+                var result = await _signInManager.PasswordSignInAsync(user!.UserName!, Input!.Password!, true, false);
 
                 if (result.Succeeded)
                 {
